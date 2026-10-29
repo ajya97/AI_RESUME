@@ -1,0 +1,8 @@
+{% extends "app_base.html" %}
+{% block title %}Report — ResumeAI{% endblock %}
+{% block crumb %}<a href="{{ url_for('pages.history') }}">History</a> / Detail{% endblock %}
+{% block content %}
+<div class="row row-between page-head"><h1 id="heading">Loading…</h1><div class="row" id="actions"></div></div>
+<div id="detail" data-kind="{{ kind }}" data-id="{{ item_id }}"><div class="skeleton" style="height:200px"></div></div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/detail.js') }}"></script>{% endblock %}

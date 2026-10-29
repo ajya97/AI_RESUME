@@ -1,0 +1,21 @@
+{% extends "app_base.html" %}
+{% block title %}Resume Chatbot — ResumeAI{% endblock %}
+{% block crumb %}Resume Chatbot{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Resume chatbot</h1><p>Ask questions about your resume, get weak spots and suggested bullet rewrites. Each message costs <b>{{ credit_costs.chat_message }} credits</b> (refunded if it fails). Rewrites are suggestions — only use what is true for you.</p></div>
+<div class="card" style="margin-bottom:16px"><div id="picker"></div></div>
+<div class="chat-wrap">
+  <aside class="card chat-side" aria-label="Conversations"><button class="btn btn-primary btn-sm" id="newChat">＋ New chat</button><div id="sessList" class="stack" style="margin-top:8px"></div></aside>
+  <section class="card chat-main" aria-label="Chat">
+    <div class="chat-log" id="log" aria-live="polite"><div class="empty"><div class="empty-icon">💬</div>Select a resume, then start a chat.</div></div>
+    <div class="suggest" id="suggest">
+      <button class="btn btn-ghost btn-sm" data-q="Summarize my skills and experience in 3 sentences.">Summarize me</button>
+      <button class="btn btn-ghost btn-sm" data-q="What are the biggest weaknesses in my resume?">Find weaknesses</button>
+      <button class="btn btn-ghost btn-sm" data-q="Suggest stronger, quantified rewrites for my experience bullets.">Improve bullets</button>
+    </div>
+    <div id="chatErr" style="padding:0 var(--space-4)"></div>
+    <form class="chat-form" id="chatForm"><label class="sr-only" for="msg">Message</label><textarea id="msg" rows="1" maxlength="2000" placeholder="Ask about your resume…"></textarea><button class="btn btn-primary" id="sendBtn" type="submit">Send</button></form>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/chatbot.js') }}"></script>{% endblock %}

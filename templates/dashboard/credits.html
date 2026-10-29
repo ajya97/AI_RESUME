@@ -1,0 +1,17 @@
+{% extends "app_base.html" %}
+{% block title %}Credits — ResumeAI{% endblock %}
+{% block crumb %}Credits{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Credits</h1><p>Credits are charged when an AI operation starts and refunded automatically if it fails. Opening pages, switching themes and viewing saved reports are always free. There is no payment or top-up feature.</p></div>
+<div class="grid grid-2">
+  <div class="card credit-hero"><div><div class="muted">Current balance</div><div class="big gradient-text" id="balanceBig">{{ credit_balance }}</div></div></div>
+  <div class="card"><h3>Price list</h3>
+    {% for k, v in credit_costs.items() %}<div class="activity-item"><span>{{ labels.get(k, k) }}</span><b>{{ v }}</b></div>{% endfor %}
+    <div class="small dim" style="margin-top:8px">Application credits are separate from the AI provider's own token usage.</div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Transaction history</h3>
+  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead><tbody id="txBody"></tbody></table></div>
+  <div class="pager"><button class="btn btn-ghost btn-sm" id="prev">← Newer</button><span class="small muted" id="pageLbl"></span><button class="btn btn-ghost btn-sm" id="next">Older →</button></div>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/credits.js') }}"></script>{% endblock %}

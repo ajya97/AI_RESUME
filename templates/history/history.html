@@ -1,0 +1,13 @@
+{% extends "app_base.html" %}
+{% block title %}History — ResumeAI{% endblock %}
+{% block crumb %}History{% endblock %}
+{% block content %}
+<div class="page-head"><h1>History</h1><p>Everything you've run, in one place. Viewing saved reports is free.</p></div>
+<div class="card">
+  <div class="filters"><input type="search" id="q" placeholder="Search by title…" aria-label="Search history">
+    <select id="type" aria-label="Filter by type"><option value="">All types</option><option value="ats">ATS analyses</option><option value="job_match">Job matches</option><option value="skill_gap">Skill gaps</option><option value="interview">Interviews</option><option value="chat">Chats</option></select></div>
+  <div id="list" aria-live="polite"></div>
+  <div class="pager"><button class="btn btn-ghost btn-sm" id="prev">← Prev</button><span class="small muted" id="pageLbl"></span><button class="btn btn-ghost btn-sm" id="next">Next →</button></div>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/history.js') }}"></script>{% endblock %}

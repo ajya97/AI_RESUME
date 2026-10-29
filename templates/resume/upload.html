@@ -1,0 +1,22 @@
+{% extends "app_base.html" %}
+{% block title %}ATS Analyzer — ResumeAI{% endblock %}
+{% block crumb %}ATS Analyzer{% endblock %}
+{% block content %}
+<div class="page-head"><h1>ATS Resume Analyzer</h1>
+  <p>Upload a text-based PDF (max 5 MB). Analysis costs <b>{{ credit_costs.ats_analysis }} credits</b> and is refunded automatically if it fails. Your score is a heuristic from this app's rules — not an employer's ATS result.</p></div>
+<div class="grid grid-2" style="align-items:start">
+  <div class="card stack">
+    <h2>Upload &amp; analyze</h2>
+    <div class="dropzone" id="dropZone" tabindex="0" role="button" aria-label="Choose a PDF resume">
+      <div class="ico-lg" aria-hidden="true">📄</div><b>Drag &amp; drop your resume</b><div class="muted small">or click to browse · PDF only · max 5 MB</div>
+      <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden></div>
+    <div class="file-chip hidden" id="fileChip"><span aria-hidden="true">📄</span><div style="flex:1"><div class="name" id="fileName"></div><div class="small dim" id="fileSize"></div></div><button class="icon-btn" id="fileRemove" aria-label="Remove file">✕</button></div>
+    <div id="progressWrap" class="hidden"><div class="progress"><span id="progressFill" style="width:0"></span></div><div class="small muted" id="progressLabel" style="margin-top:6px"></div></div>
+    <button class="btn btn-primary btn-block" id="analyzeBtn" disabled>Select a PDF to analyze</button>
+    <div id="uploadError"></div>
+  </div>
+  <div class="card"><div class="card-title"><h2>Your resumes</h2></div><div id="resumeList" class="resume-list"><div class="skeleton" style="height:56px"></div></div></div>
+</div>
+<div id="results" style="margin-top:20px"></div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/upload.js') }}"></script>{% endblock %}

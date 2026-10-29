@@ -1,0 +1,15 @@
+{% extends "app_base.html" %}
+{% block title %}Skill Gap — ResumeAI{% endblock %}
+{% block crumb %}Skill Gap{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Skill-gap analyzer</h1><p>Compare the skills your resume mentions with a target role. Costs <b>{{ credit_costs.skill_gap }} credits</b> (refunded if it fails). Skills are inferred from resume text — they are not verified by any test.</p></div>
+<div class="card stack">
+  <div id="picker"></div>
+  <div class="field" style="margin:0"><label for="role">Target role</label><input id="role" type="text" maxlength="120" list="roles" placeholder="e.g. Data Analyst, Backend Developer, DevOps Engineer"><datalist id="roles"></datalist></div>
+  <div class="field" style="margin:0"><label for="reqs">Job requirements <span class="dim">(optional)</span></label><textarea id="reqs" rows="5" maxlength="8000" placeholder="Paste requirements to use them instead of the built-in skill list for the role."></textarea></div>
+  <button class="btn btn-primary" id="runBtn">Analyze skill gap ({{ credit_costs.skill_gap }} credits)</button>
+  <div id="err"></div>
+</div>
+<div id="result" style="margin-top:20px"></div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/skill-gap.js') }}"></script>{% endblock %}

@@ -1,0 +1,19 @@
+.meter { height: 12px; }
+.compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); }
+.plan-item { display: grid; gap: 6px; }
+.plan-item select { width: auto; padding: 6px 10px; font-size: .85rem; }
+.q-card .q-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.q-card .q-text { font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; font-family: var(--font-display); }
+.fb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); } .fb-score { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; }
+.chat-wrap { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: var(--space-4); min-height: 560px; }
+.chat-side { display: flex; flex-direction: column; gap: 8px; max-height: 70vh; overflow-y: auto; }
+.chat-side button.sess { text-align: left; background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 10px; padding: 9px 12px; cursor: pointer; font: inherit; }
+.chat-side button.sess[aria-current="true"] { border-color: var(--blue); background: rgba(var(--blue-rgb), .12); }
+.chat-main { display: flex; flex-direction: column; min-height: 560px; padding: 0; overflow: hidden; }
+.chat-log { flex: 1; overflow-y: auto; padding: var(--space-4); display: flex; flex-direction: column; gap: 12px; max-height: 60vh; }
+.msg { max-width: 82%; padding: 11px 15px; border-radius: 16px; white-space: pre-wrap; word-break: break-word; }
+.msg.user { align-self: flex-end; background: var(--grad-brand); color: #fff; border-bottom-right-radius: 4px; }
+.msg.assistant { align-self: flex-start; background: var(--surface-hover); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.chat-form { display: flex; gap: 10px; padding: var(--space-3); border-top: 1px solid var(--border); align-items: flex-end; } .chat-form textarea { min-height: 48px; max-height: 140px; }
+.suggest { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 var(--space-4) var(--space-3); }
+@media (max-width: 860px) { .chat-wrap { grid-template-columns: minmax(0, 1fr); } .fb-grid { grid-template-columns: minmax(0, 1fr); } .msg { max-width: 92%; } }

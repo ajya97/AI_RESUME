@@ -1,0 +1,18 @@
+{% extends "public_base.html" %}
+{% block content %}
+<section class="hero">
+  <span class="badge badge-violet">AI Resume &amp; Career Copilot</span>
+  <h1 style="margin-top:16px">Your resume, <span class="gradient-text">supercharged</span> by AI</h1>
+  <p class="lead">Upload a PDF to get an ATS-style score, match it to any job description, close skill gaps, rehearse interviews, and chat with an assistant that actually knows your resume.</p>
+  <div class="cta">
+    {% if current_user.is_authenticated %}<a class="btn btn-primary" href="{{ url_for('pages.analyze') }}">Analyze a resume →</a>
+    {% else %}<a class="btn btn-primary" href="{{ url_for('auth.register') }}">Start free — {{ initial_credits }} credits</a>
+    <a class="btn btn-ghost" href="{{ url_for('pages.features') }}">See features</a>{% endif %}
+  </div>
+</section>
+<section class="features-grid" aria-label="Highlights">
+  <div class="card feature"><div class="ico-lg">📊</div><h3>ATS analysis</h3><p class="muted">Section-by-section heuristic score with concrete fixes.</p></div>
+  <div class="card feature"><div class="ico-lg">🎯</div><h3>Job matching</h3><p class="muted">Paste a job description; see matched and missing skills.</p></div>
+  <div class="card feature"><div class="ico-lg">🎤</div><h3>Interview copilot</h3><p class="muted">Personalised questions and instant practice feedback.</p></div>
+</section>
+{% endblock %}

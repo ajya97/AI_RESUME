@@ -1,0 +1,28 @@
+{% extends "app_base.html" %}
+{% block title %}Dashboard — ResumeAI{% endblock %}
+{% block crumb %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Hi {{ current_user.display_name.split(' ')[0] }} 👋</h1><p>Your career activity at a glance. All numbers come from your saved activity.</p></div>
+<div class="grid grid-4" id="kpis" aria-busy="true">
+  <div class="card kpi"><div class="skeleton" style="height:48px"></div></div><div class="card kpi"><div class="skeleton" style="height:48px"></div></div>
+  <div class="card kpi"><div class="skeleton" style="height:48px"></div></div><div class="card kpi"><div class="skeleton" style="height:48px"></div></div>
+</div>
+<h2 style="margin-top:28px">Quick actions</h2>
+<div class="quick-actions">
+  <a href="{{ url_for('pages.analyze') }}"><span class="ico-lg">📊</span><span><b>Analyze resume</b><br><span class="cost-tag">{{ credit_costs.ats_analysis }} credits</span></span></a>
+  <a href="{{ url_for('pages.job_match') }}"><span class="ico-lg">🎯</span><span><b>Match a job</b><br><span class="cost-tag">{{ credit_costs.job_match }} credits</span></span></a>
+  <a href="{{ url_for('pages.skill_gap') }}"><span class="ico-lg">🧠</span><span><b>Skill gap</b><br><span class="cost-tag">{{ credit_costs.skill_gap }} credits</span></span></a>
+  <a href="{{ url_for('pages.interview') }}"><span class="ico-lg">🎤</span><span><b>Mock interview</b><br><span class="cost-tag">{{ credit_costs.interview_session }} credits</span></span></a>
+  <a href="{{ url_for('pages.chatbot') }}"><span class="ico-lg">💬</span><span><b>Ask your resume</b><br><span class="cost-tag">{{ credit_costs.chat_message }} credits/msg</span></span></a>
+</div>
+<div class="grid grid-3" style="margin-top:28px">
+  <div class="card"><h3>ATS score over time</h3><svg class="chart" id="chartAts" role="img" aria-label="ATS score over time"></svg><div class="empty small hidden" id="emptyAts">Run an ATS analysis to see your trend.</div></div>
+  <div class="card"><h3>Skill-gap coverage</h3><svg class="chart" id="chartGap" role="img" aria-label="Skill coverage per skill-gap report"></svg><div class="empty small hidden" id="emptyGap">No skill-gap reports yet.</div></div>
+  <div class="card"><h3>Interview progress</h3><svg class="chart" id="chartIv" role="img" aria-label="Interview average score per completed session"></svg><div class="empty small hidden" id="emptyIv">Complete a mock interview to track progress.</div></div>
+</div>
+<div class="grid grid-2" style="margin-top:16px">
+  <div class="card"><div class="card-title"><h3>Recent activity</h3><a href="{{ url_for('pages.history') }}" class="small">View all</a></div><div id="recent"></div></div>
+  <div class="card"><h3>Credit usage</h3><div id="usage"></div></div>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>{% endblock %}

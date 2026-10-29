@@ -1,0 +1,18 @@
+{% extends "public_base.html" %}
+{% block title %}Features — ResumeAI{% endblock %}
+{% block content %}
+<section class="hero" style="padding-bottom:var(--space-4)"><h1>Everything for a <span class="gradient-text">stronger application</span></h1>
+<p class="lead">Credits are charged per AI operation and refunded automatically if an operation fails. Viewing saved reports is always free.</p></section>
+<section class="features-grid">
+  {% for ico, t, d, k in [
+   ('📊','ATS resume analyzer','Heuristic ATS score, contact/section checks, keyword coverage, strengths and fixes. Downloadable PDF report.','ats_analysis'),
+   ('🎯','Job description match','Documented, deterministic skill & keyword matching plus AI tailoring advice.','job_match'),
+   ('🧠','Skill-gap analyzer','Inferred skills vs. a target role, prioritised learning plan and project ideas.','skill_gap'),
+   ('🎤','AI interview copilot','Technical, HR, project and scenario questions; per-answer feedback and session summary.','interview_session'),
+   ('💬','Resume chatbot','Ask questions about your resume and get suggested bullet rewrites, clearly labelled.','chat_message'),
+   ('🧾','Resume templates','ATS-friendly templates with live preview and PDF export — free, no AI.',None)] %}
+  <div class="card feature"><div class="ico-lg">{{ ico }}</div><h3>{{ t }}</h3><p class="muted">{{ d }}</p>
+    {% if k %}<span class="badge">{{ credit_costs[k] }} credits{% if k=='interview_session' %} + {{ credit_costs['interview_evaluation'] }}/answer{% elif k=='chat_message' %} / message{% endif %}</span>{% else %}<span class="badge badge-success">Free</span>{% endif %}</div>
+  {% endfor %}
+</section>
+{% endblock %}

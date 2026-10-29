@@ -1,0 +1,9 @@
+{% extends "public_base.html" %}
+{% block title %}{{ title }} — ResumeAI{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="card auth-card" style="text-align:center">
+  <div class="gradient-text" style="font-family:var(--font-display);font-size:4rem;font-weight:800">429</div>
+  <h1>{{ title }}</h1><p class="muted">{{ message }}</p>
+  <a class="btn btn-primary" href="{{ url_for('pages.index') }}">Back to home</a>
+</div></div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set nav = [
+  ('pages.dashboard','Dashboard','🏠','/dashboard','Overview'),
+  ('pages.analyze','ATS Analyzer','📊','/analyze','Resume'),
+  ('pages.templates_page','Templates','🧾','/templates','Resume'),
+  ('pages.job_match','Job Match','🎯','/job-match','Career'),
+  ('pages.skill_gap','Skill Gap','🧠','/skill-gap','Career'),
+  ('pages.interview','Interview Copilot','🎤','/interview','Career'),
+  ('pages.chatbot','Resume Chatbot','💬','/chatbot','Career'),
+  ('pages.history','History','🕘','/history','Account'),
+  ('account.credits_page','Credits','🪙','/credits','Account'),
+  ('account.settings','Settings','⚙️','/settings','Account'),
+] %}
+{% block shell %}
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="Primary">
+    <a class="brand" href="{{ url_for('pages.dashboard') }}"><span class="brand-mark" aria-hidden="true">⚡</span> Resume<span class="gradient-text">AI</span></a>
+    <nav class="nav">
+      {% set ns = namespace(group='') %}
+      {% for ep, label, ico, path, group in nav %}
+        {% if group != ns.group %}<div class="nav-label">{{ group }}</div>{% set ns.group = group %}{% endif %}
+        <a href="{{ url_for(ep) }}" {% if request.path == path %}aria-current="page"{% endif %}><span class="ico" aria-hidden="true">{{ ico }}</span>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="sidebar-foot">AI output is advisory. Heuristic ATS scores don't replicate any employer system.</div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <strong class="muted">{% block crumb %}{% endblock %}</strong>
+      </div>
+      <div class="topbar-right">
+        <a class="credit-pill" href="{{ url_for('account.credits_page') }}" title="Credit balance" aria-label="Credit balance">
+          <span aria-hidden="true">🪙</span><b id="creditBalance">{{ credit_balance }}</b><span class="lbl">credits</span></a>
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme"><span class="sun">☀</span><span class="moon">🌙</span></button>
+        <div class="profile-menu">
+          <button type="button" class="avatar" id="profileBtn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">{{ current_user.initials }}</button>
+          <div class="menu-pop" id="profileMenu" role="menu">
+            <div class="who"><b>{{ current_user.display_name }}</b><span class="small muted">{{ current_user.email }}</span></div>
+            <a role="menuitem" href="{{ url_for('account.profile') }}">Profile</a>
+            <a role="menuitem" href="{{ url_for('account.settings') }}">Settings</a>
+            <form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit" role="menuitem">Sign out</button></form>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="content" id="main">
+      {% with messages = get_flashed_messages(with_categories=true) %}{% for cat, m in messages %}<div class="alert alert-{{ cat }}" role="alert">{{ m }}</div>{% endfor %}{% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

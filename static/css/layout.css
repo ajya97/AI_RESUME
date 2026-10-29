@@ -1,0 +1,44 @@
+/* ── App shell ─────────────────────────────────────────── */
+.app { display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr); min-height: 100vh; }
+.sidebar { position: sticky; top: 0; height: 100vh; padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-4);
+  background: var(--bg-elevated); border-right: 1px solid var(--border); overflow-y: auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--text); text-decoration: none !important; padding: 4px 8px; }
+.brand-mark { width: 34px; height: 34px; border-radius: 10px; background: var(--grad-brand); display: grid; place-items: center; color: #fff; box-shadow: var(--shadow-glow); }
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-dim); padding: 12px 12px 4px; }
+.nav a { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px; color: var(--text-muted); font-weight: 600; text-decoration: none !important; }
+.nav a:hover { background: var(--surface-hover); color: var(--text); }
+.nav a[aria-current="page"] { background: rgba(var(--blue-rgb), .16); color: var(--text); box-shadow: inset 3px 0 0 var(--blue); }
+.nav .ico { width: 20px; text-align: center; }
+.sidebar-foot { margin-top: auto; font-size: .8rem; color: var(--text-dim); }
+
+.main { min-width: 0; display: flex; flex-direction: column; }
+.topbar { position: sticky; top: 0; z-index: 30; height: var(--topbar-h); display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 var(--space-5); background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; }
+.menu-btn { display: none; }
+.content { padding: var(--space-5); width: 100%; max-width: 1180px; margin: 0 auto; flex: 1; }
+.page-head { margin-bottom: var(--space-5); } .page-head p { color: var(--text-muted); max-width: 70ch; margin: 0; }
+
+.profile-menu { position: relative; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--grad-brand); color: #fff; font-weight: 800; display: grid; place-items: center; border: 0; cursor: pointer; }
+.menu-pop { position: absolute; right: 0; top: 48px; min-width: 220px; background: var(--surface-solid); border: 1px solid var(--border-strong); border-radius: 14px; box-shadow: var(--shadow); padding: 8px; display: none; z-index: 40; }
+.menu-pop.open { display: block; }
+.menu-pop .who { padding: 8px 12px; border-bottom: 1px solid var(--border); margin-bottom: 6px; } .menu-pop .who b { display: block; }
+.menu-pop a, .menu-pop button { display: block; width: 100%; text-align: left; background: none; border: 0; font: inherit; color: var(--text); padding: 9px 12px; border-radius: 8px; cursor: pointer; text-decoration: none !important; }
+.menu-pop a:hover, .menu-pop button:hover { background: var(--surface-hover); }
+.theme-toggle .moon { display: none; } :root[data-theme="light"] .theme-toggle .sun { display: none; } :root[data-theme="light"] .theme-toggle .moon { display: inline; }
+.scrim { display: none; }
+
+/* ── Public pages ──────────────────────────────────────── */
+.public-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px var(--space-5); max-width: 1180px; margin: 0 auto; gap: 12px; }
+.public-nav .links { display: flex; align-items: center; gap: 18px; } .public-nav .links a:not(.btn) { color: var(--text-muted); font-weight: 600; }
+.hero { text-align: center; padding: var(--space-7) var(--space-4) var(--space-6); max-width: 860px; margin: 0 auto; }
+.hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+.hero p.lead { font-size: 1.15rem; color: var(--text-muted); max-width: 60ch; margin: 0 auto var(--space-5); }
+.hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.features-grid { max-width: 1180px; margin: 0 auto; padding: 0 var(--space-5) var(--space-7); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.feature .ico-lg { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(var(--violet-rgb), .15); font-size: 1.3rem; margin-bottom: 10px; }
+.footer { text-align: center; color: var(--text-dim); font-size: .85rem; padding: var(--space-5); border-top: 1px solid var(--border); }
+.auth-wrap { min-height: calc(100vh - 140px); display: grid; place-items: center; padding: var(--space-5) var(--space-4); }
+.auth-card { width: 100%; max-width: 440px; }

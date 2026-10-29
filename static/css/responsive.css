@@ -1,0 +1,17 @@
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: fixed; inset: 0 auto 0 0; width: min(82vw, 290px); z-index: 60; transform: translateX(-102%); transition: transform .25s var(--ease); box-shadow: var(--shadow); }
+  .sidebar.open { transform: none; }
+  .scrim.open { display: block; position: fixed; inset: 0; background: rgba(2, 6, 23, .55); z-index: 50; }
+  .menu-btn { display: inline-grid; }
+  .grid-2, .grid-3 { grid-template-columns: minmax(0, 1fr); }
+  .content { padding: var(--space-4); } .topbar { padding: 0 var(--space-4); }
+}
+@media (max-width: 560px) {
+  .grid-4 { grid-template-columns: minmax(0, 1fr); } .features-grid { grid-template-columns: minmax(0, 1fr); padding: 0 var(--space-4) var(--space-6); }
+  .bar-row { grid-template-columns: 100px 1fr 50px; } .public-nav .links a:not(.btn) { display: none; }
+  .credit-pill .lbl { display: none; } .card { padding: var(--space-4); }
+}

@@ -1,0 +1,21 @@
+{% extends "app_base.html" %}
+{% block title %}Resume Templates — ResumeAI{% endblock %}
+{% block crumb %}Templates{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Resume templates</h1><p>Clean, single-column, ATS-friendly layouts. Editing, previewing and PDF export are deterministic and <b>free</b> — no AI and no credits.</p></div>
+<div class="card" style="margin-bottom:16px"><div id="picker"></div></div>
+<div id="stage" class="hidden">
+  <div class="grid grid-4" id="tplCards" style="margin-bottom:16px" role="group" aria-label="Choose a template">
+    {% for t in templates %}<button class="tpl-card" data-key="{{ t.key }}" aria-pressed="false"><div class="tpl-swatch" style="background:{{ t.accent }}"></div><b>{{ t.name }}</b><div class="small muted">{{ t.description }}</div></button>{% endfor %}
+  </div>
+  <div class="grid grid-2" style="align-items:start">
+    <div class="card editor stack"><div class="card-title"><h2>Content</h2><button class="btn btn-primary btn-sm" id="saveBtn">Save changes</button></div>
+      <div class="hint">Each entry is separated by a blank line. In Experience/Projects/Education, the first line is the heading; the following lines become bullets.</div>
+      <div id="editor"></div></div>
+    <div class="card"><div class="card-title"><h2>Preview</h2><a class="btn btn-ghost btn-sm" id="pdfBtn" href="#">⬇ Download PDF</a></div>
+      <iframe class="preview-frame" id="preview" title="Resume preview" sandbox></iframe>
+      <div class="hint">PDF export uses standard Latin fonts; characters outside that set may be replaced.</div></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/templates.js') }}"></script>{% endblock %}

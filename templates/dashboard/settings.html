@@ -1,0 +1,16 @@
+{% extends "app_base.html" %}
+{% block title %}Settings — ResumeAI{% endblock %}
+{% block crumb %}Settings{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Settings</h1></div>
+<div class="grid grid-2">
+  <div class="card"><h3>Appearance</h3><p class="muted">Your choice is saved to your account and follows you across devices.</p>
+    <div class="row"><button class="btn btn-ghost" data-theme-set="dark">🌙 Dark</button><button class="btn btn-ghost" data-theme-set="light">☀ Light</button></div></div>
+  <div class="card"><h3>Your data</h3><p class="muted">Uploaded resumes are stored privately and are only accessible to you. Delete a resume anytime from the ATS Analyzer page.</p></div>
+  <div class="card" style="grid-column:1/-1"><h3>Delete account</h3>
+    <p class="muted">Permanently deletes your account, resumes, reports, chats, interviews and credits. This cannot be undone.</p>
+    <form method="post" action="{{ url_for('account.delete_account') }}" class="row"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="password" name="password" placeholder="Confirm your password" autocomplete="current-password" required style="max-width:280px" aria-label="Password">
+      <button class="btn btn-danger" type="submit">Delete my account</button></form></div>
+</div>
+{% endblock %}

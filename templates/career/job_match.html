@@ -1,0 +1,16 @@
+{% extends "app_base.html" %}
+{% block title %}Job Match — ResumeAI{% endblock %}
+{% block crumb %}Job Match{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Job description match</h1><p>Paste a job description to compare it with your resume. Costs <b>{{ credit_costs.job_match }} credits</b> (refunded if it fails). The score is a transparent heuristic, not a hiring prediction.</p></div>
+<div class="card stack">
+  <div id="picker"></div>
+  <div class="field" style="margin:0"><label for="jd">Job description</label>
+    <textarea id="jd" rows="10" maxlength="8000" placeholder="Paste the full job posting here…"></textarea>
+    <div class="hint"><span id="jdCount">0</span> / 8000 characters</div></div>
+  <button class="btn btn-primary" id="runBtn">Compare with my resume ({{ credit_costs.job_match }} credits)</button>
+  <div id="err"></div>
+</div>
+<div id="result" style="margin-top:20px"></div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/pages/job-match.js') }}"></script>{% endblock %}

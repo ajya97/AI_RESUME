@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block shell %}
+<header class="public-nav">
+  <a class="brand" href="{{ url_for('pages.index') }}"><span class="brand-mark" aria-hidden="true">⚡</span> Resume<span class="gradient-text">AI</span></a>
+  <nav class="links" aria-label="Main">
+    <a href="{{ url_for('pages.features') }}">Features</a>
+    <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle light or dark theme"><span class="sun">☀</span><span class="moon">🌙</span></button>
+    {% if current_user.is_authenticated %}
+      <a class="btn btn-primary btn-sm" href="{{ url_for('pages.dashboard') }}">Dashboard</a>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}">Sign in</a>
+      <a class="btn btn-primary btn-sm" href="{{ url_for('auth.register') }}">Get started</a>
+    {% endif %}
+  </nav>
+</header>
+<main id="main">
+  {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}
+  <div class="content" style="padding-bottom:0">{% for cat, m in messages %}<div class="alert alert-{{ cat }}" role="alert">{{ m }}</div>{% endfor %}</div>
+  {% endif %}{% endwith %}
+  {% block content %}{% endblock %}
+</main>
+{% include "partials/footer.html" %}
+{% endblock %}

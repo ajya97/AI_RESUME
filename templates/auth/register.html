@@ -1,0 +1,20 @@
+{% extends "public_base.html" %}
+{% block title %}Create account — ResumeAI{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="card auth-card">
+  <h1>Create your account</h1>
+  <p class="sub">Get <b>{{ initial_credits }} free credits</b> to use on AI analysis, interviews and more.</p>
+  <form method="post" action="{{ url_for('auth.register') }}" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="theme" id="themeField" value="">
+    <div class="field"><label for="full_name">Full name</label><input id="full_name" name="full_name" type="text" autocomplete="name" maxlength="120" required value="{{ form.get('full_name','') }}"></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required value="{{ form.get('email','') }}"></div>
+    <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required>
+      <div class="pw-rules">At least 8 characters, with a letter and a number.</div></div>
+    <div class="field"><label for="confirm_password">Confirm password</label><input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required></div>
+    <button class="btn btn-primary btn-block" type="submit">Create account</button>
+  </form>
+  <p class="foot">Already registered? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+</div></div>
+<script type="module" src="{{ url_for('static', filename='js/pages/register.js') }}"></script>
+{% endblock %}

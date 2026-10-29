@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>{{ c.get('name') or 'Resume' }}</title>
+<style>
+  body { margin: 0; background: #fff; color: #111; font-family: {{ "'Times New Roman', Times, serif" if spec.font == 'Times-Roman' else "Helvetica, Arial, sans-serif" }}; font-size: {{ spec.body_size + 1.5 }}px; line-height: 1.45; }
+  .page { max-width: 780px; margin: 0 auto; padding: {{ '28px 34px' if key == 'compact' else '40px 48px' }}; }
+  h1 { margin: 0 0 4px; font-size: {{ spec.name_size + 8 }}px; color: {{ spec.accent }}; text-align: {{ spec.align }}; }
+  .contact { text-align: {{ spec.align }}; color: #333; margin-bottom: 8px; }
+  h2 { font-size: {{ spec.head_size + 2 }}px; color: {{ spec.accent }}; margin: 16px 0 4px; {% if spec.caps %}text-transform: uppercase;{% endif %} {% if spec.rule %}border-bottom: 1px solid {{ spec.accent }}; padding-bottom: 2px;{% endif %} }
+  h3 { margin: 8px 0 2px; font-size: 1em; } ul { margin: 2px 0 6px; padding-left: 20px; } p { margin: 2px 0; }
+</style></head>
+<body><div class="page">
+  <h1>{{ c.get('name') or 'Your Name' }}</h1>
+  {% if contact %}<div class="contact">{{ contact | join('  |  ') }}</div>{% endif %}
+  {% for sk, label in sections %}{% set v = c.get(sk) %}{% if v %}
+    <h2>{{ label }}</h2>
+    {% if sk == 'summary' %}<p>{{ v }}</p>
+    {% elif sk == 'skills' %}<p>{{ v | join(', ') }}</p>
+    {% elif sk in ('certifications','achievements') %}<ul>{% for i in v %}<li>{{ i }}</li>{% endfor %}</ul>
+    {% else %}{% for e in v %}{% set parts = split(e) %}<h3>{{ parts[0] }}</h3>{% if parts[1] %}<ul>{% for b in parts[1] %}<li>{{ b }}</li>{% endfor %}</ul>{% endif %}{% endfor %}
+    {% endif %}
+  {% endif %}{% endfor %}
+</div></body></html>

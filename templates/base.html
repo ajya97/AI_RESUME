@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ user_theme }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="color-scheme" content="dark light">
+  <title>{% block title %}ResumeAI — AI Resume &amp; Career Copilot{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {% for f in ['variables','base','layout','components','auth','dashboard','resume','career','responsive'] %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/' ~ f ~ '.css') }}">
+  {% endfor %}
+  {# Applies the theme BEFORE first paint (no flash). Signed-in users: server value; guests: localStorage. #}
+  <script nonce="{{ csp_nonce }}">
+    (function () {
+      var el = document.documentElement, t = el.getAttribute('data-theme');
+      if (t !== 'light' && t !== 'dark') {
+        try { t = localStorage.getItem('resumeai-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        el.setAttribute('data-theme', t);
+      }
+    })();
+  </script>
+</head>
+<body class="{% block body_class %}{% endblock %}" data-auth="{{ 'yes' if current_user.is_authenticated else 'no' }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs><linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:var(--blue)"/><stop offset="55%" style="stop-color:var(--violet)"/><stop offset="100%" style="stop-color:var(--cyan)"/>
+    </linearGradient></defs>
+  </svg>
+  {% block shell %}{% endblock %}
+  <div id="toasts" role="status" aria-live="polite"></div>
+  <script type="module" src="{{ url_for('static', filename='js/core/theme.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

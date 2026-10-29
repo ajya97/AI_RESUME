@@ -1,0 +1,25 @@
+# secrets
+.env
+.env.*
+!.env.example
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+# runtime data (private resumes!)
+instance/
+static/uploads/
+uploads/
+# db dumps / logs / OS
+*.sql
+*.dump
+*.sqlite
+*.sqlite3
+*.log
+.DS_Store
+.idea/
+.vscode/
